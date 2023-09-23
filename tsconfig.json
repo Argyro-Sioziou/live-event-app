@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+      "moduleResolution": "node",
+      "module": "commonjs",
+      "target": "es2017",
+      "outDir": "dist",
+      "rootDir": "src",
+      "strict": true,
+      "sourceMap": true,
+      "esModuleInterop": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "resolveJsonModule": true,
+      "strictPropertyInitialization": false,
+      "baseUrl": "./src",
+      "paths": {
+        "@data-source": ["data-source.ts"],
+        "@models/*": ["models/*"],
+        "@services/*": ["services/*"],
+        "@routes/*": ["routes/*"],
+        "@middleware/*": ["middleware/*"],
+        "@controllers/*": ["controllers/*"],
+        "@common/*": ["common/*"]
+      },
+  },
+  "include": [
+    "**/*.ts",
+    "types/*.ts",
+    "src",
+  ],
+}
