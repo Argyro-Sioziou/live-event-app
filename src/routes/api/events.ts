@@ -4,12 +4,20 @@ const router: Router = Router();
 
 import EventController from "@controllers/event";
 
-router.get('/', EventController.getEvents);
+const eventController = new EventController();
 
-router.get('/:id', EventController.getEventById);
+/* Event routers: /api/events */
 
-router.post('/', EventController.createEvent);
+/* GET events */
+router.get('/', eventController.getEvents);
 
-router.put('/:id', EventController.updateEvent);
+/* GET event by id */
+router.get('/:id', eventController.getEventById);
+
+/* POST event */
+router.post('/', eventController.createEvent);
+
+/* PUT event by id */
+router.put('/:id', eventController.updateEvent);
 
 export default router;

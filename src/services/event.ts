@@ -6,6 +6,10 @@ import HttpError from "@common/http-error";
 const eventRepository = AppDataSource.getRepository(EventModel);
 
 export default class EventService {
+  /**
+   * Finds all events
+   * @returns {Promise<EventModel[]>} An array of all events
+   */
   public async getEvents(): Promise<EventModel[]> {
     // Get all events
     const events = await eventRepository.find();
@@ -13,6 +17,11 @@ export default class EventService {
     return events;
   }
 
+  /**
+   * Find the event with the provided id
+   * @param id {number} - Id of the event to find
+   * @returns {Promise<EventModel | null>} The event with the provided id
+   */
   public async getEventById(id: number): Promise<EventModel | null> {
     // Get event by specific id
     const event = await eventRepository.findOneBy({ id });
@@ -26,6 +35,13 @@ export default class EventService {
     return event;
   }
 
+  /**
+   * Creates a new event with given properties
+   * @param title {string} - Event title
+   * @param description {string} - Event description
+   * @param eventDateTime {Date} - Event date time
+   * @returns {Promise<EventModel | null>} Created event
+   */
   public async createEvent(title: string, description: string, eventDateTime: Date): Promise<EventModel> {
     // Create new event
     const createdEvent = await eventRepository.save({
@@ -37,7 +53,19 @@ export default class EventService {
     return createdEvent;
   }
 
-  public async updateEvent(id: number, propertiesToUpdate: any): Promise<void> {
+  /**
+   * Creates a new event with given properties
+   * @param id {number} - Id of the event to update
+   * @param propertiesToUpdate {object} - Properties to update
+   * @param [propertiesToUpdate.title] {string} - Event title
+   * @param [propertiesToUpdate.description] {string} - Event description
+   * @param [propertiesToUpdate.eventDateTime] {Date} - Event date time
+   * @returns {Promise<void>}
+   */
+  public async updateEvent(
+    id: number,
+    { title, description, eventDateTime } : { title?: string, description?: string, eventDateTime?: Date }
+  ): Promise<void> {
     // Update event by specific id
     const event = await eventRepository.findOneBy({ id });
 
@@ -47,8 +75,10 @@ export default class EventService {
       `Event with id ${id} not found`,
     );
 
-    await eventRepository.update(id, propertiesToUpdate);
-
-    return;
+    await eventRepository.update(id, {
+      title,
+      description,
+      eventDateTime,
+    });
   }
 }
