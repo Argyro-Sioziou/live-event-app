@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 
 import AppDataSource from "@data-source";
-import middleware from '@middleware/index';
+import middleware from '@middleware/index.middleware';
 
 const app: Application = express();
 

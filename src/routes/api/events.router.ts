@@ -2,7 +2,7 @@ import { Router } from "express";
 
 const router: Router = Router();
 
-import EventController from "@controllers/event";
+import EventController from "@controllers/event.controller";
 
 const eventController = new EventController();
 
