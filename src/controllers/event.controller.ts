@@ -4,7 +4,7 @@ import { Request, Response, NextFunction} from 'express';
 import HttpError from '@common/http-error';
 
 // Services
-import EventService from '@services/event';
+import EventService from '@services/event.service';
 
 const eventService = new EventService();
 
