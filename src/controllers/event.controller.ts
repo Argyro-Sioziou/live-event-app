@@ -20,8 +20,9 @@ export default class EventController {
       // Finds all events
       const events = await eventService.getEvents();
     
-      res.status(200).json({ events })
+      res.status(200).json({ data: events, success: true })
     } catch (error) {
+      console.log(error);
       // Continue to error middleware
       next(error);
     }
@@ -38,7 +39,7 @@ export default class EventController {
       // Finds event by id passed in request params
       const event = await eventService.getEventById(parseInt(req.params.id));
     
-      res.status(200).json({ event })
+      res.status(200).json({ data: event, success: true })
     } catch (error) {
       // Continue to error middleware
       next(error);
@@ -65,7 +66,7 @@ export default class EventController {
 
       const event = await eventService.createEvent(title, description, eventDateTime);
     
-      res.status(200).json({ event })
+      res.status(200).json({ data: event, success: true })
     } catch (error) {
       // Continue to error middleware
       next(error);
@@ -88,7 +89,7 @@ export default class EventController {
   
       const event = await eventService.updateEvent(eventId, propertiesToUpdate);
     
-      res.status(200).json({ event })
+      res.status(200).json({ data: event, success: true })
     } catch (error) {
       // Continue to error middleware
       next(error);

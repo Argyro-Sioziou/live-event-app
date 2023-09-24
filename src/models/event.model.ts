@@ -15,11 +15,18 @@ export default class EventModel {
     eventDateTime: Date
 
     @Column({ nullable: true })
-    Location: string
+    location: string
 
     @CreateDateColumn()
     createdDate: Date
 
     @UpdateDateColumn()
     updatedDate: Date
+
+    constructor(title: string, description: string, eventDateTime: Date, location: string) {
+        this.title = title;
+        this.description = description;
+        this.eventDateTime = eventDateTime;
+        this.location = location;
+      }
 }

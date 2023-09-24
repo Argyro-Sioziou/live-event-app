@@ -1,4 +1,4 @@
-import EventModel from "@models/event";
+import EventModel from "@models/event.model";
 import AppDataSource from "@data-source";
 
 import HttpError from "@common/http-error";

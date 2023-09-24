@@ -1,15 +1,15 @@
 import { Request, Response } from 'express'
 
-import HttpError from '../common/http-error';
+import HttpError from '@common/http-error';
 
 const errorHandler = (
   err: HttpError,
   req: Request,
   res: Response,
 ) => {
-  const status = err.statusCode || err.status || 500
+  const status = err.statusCode || 500
 
-  res.status(status).send(err)
+  res.status(status).json({ success: false, err });
 }
 
 export default errorHandler;

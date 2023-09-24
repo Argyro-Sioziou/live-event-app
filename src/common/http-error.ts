@@ -1,7 +1,6 @@
 class HttpError extends Error {
   name: string
   statusCode?: number
-  status?: number
   message: string
   error: string | null
 

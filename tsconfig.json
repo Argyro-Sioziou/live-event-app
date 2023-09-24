@@ -20,12 +20,12 @@
         "@routes/*": ["routes/*"],
         "@middleware/*": ["middleware/*"],
         "@controllers/*": ["controllers/*"],
-        "@common/*": ["common/*"]
+        "@common/*": ["common/*"],
+        "@src/*": ["*"],
       },
   },
   "include": [
-    "**/*.ts",
-    "types/*.ts",
+    "tests/*.ts",
     "src",
   ],
 }
