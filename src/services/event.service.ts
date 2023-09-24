@@ -27,8 +27,8 @@ export default class EventService {
     const event = await eventRepository.findOneBy({ id });
 
     if (!event) throw new HttpError(
-      'NOT FOUND',
-      404,
+      'BAD REQUEST',
+      400,
       `Event with id ${id} not found`,
     );
 
@@ -70,8 +70,8 @@ export default class EventService {
     const event = await eventRepository.findOneBy({ id });
 
     if (!event) throw new HttpError(
-      'NOT FOUND',
-      404,
+      'BAD REQUEST',
+      400,
       `Event with id ${id} not found`,
     );
 
