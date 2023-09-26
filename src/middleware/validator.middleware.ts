@@ -5,7 +5,7 @@ import { validationResult } from 'express-validator'
 import HttpError from '@common/http-error';
 
 
-export default (req: Request, res: Response, next: NextFunction) => {
+function validate(req: Request, res: Response, next: NextFunction) {
   const errors = validationResult(req)
   if (errors.isEmpty()) return next();
 
@@ -18,3 +18,5 @@ export default (req: Request, res: Response, next: NextFunction) => {
 
   return res.status(422).json({ success: false, error });
 }
+
+export default { validate };

@@ -43,6 +43,13 @@ export default class EventService {
    * @returns {Promise<EventModel | null>} Created event
    */
   public async createEvent(title: string, description: string, eventDateTime: Date): Promise<EventModel> {
+    // Validates all required properties exist
+    if (!title || !description || !eventDateTime) throw new HttpError(
+      'REQUIRED FIELDS MISSING',
+      400,
+      `Title: ${title}, Description: ${description}, Event Date Time: ${eventDateTime}}`,
+    );
+
     // Create new event
     const createdEvent = await eventRepository.save({
       title,

@@ -1,8 +1,5 @@
 import { Request, Response, NextFunction} from 'express';
 
-// Common
-import HttpError from '@common/http-error';
-
 // Services
 import EventService from '@services/event.service';
 
@@ -22,7 +19,6 @@ export default class EventController {
     
       res.status(200).json({ data: events, success: true })
     } catch (error) {
-      console.log(error);
       // Continue to error middleware
       next(error);
     }
@@ -56,13 +52,6 @@ export default class EventController {
     try {
       // Reads event properties from request body
       const { title, description, eventDateTime } = req.body as any;
-    
-      // Validates all required properties exist
-      if (!title || !description || !eventDateTime) throw new HttpError(
-        'REQUIRED FIELDS MISSING',
-        400,
-        `Title: ${title}, Description: ${description}, Event Date Time: ${eventDateTime}}`,
-      );
 
       const event = await eventService.createEvent(title, description, eventDateTime);
     
