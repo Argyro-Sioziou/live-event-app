@@ -1,4 +1,4 @@
-import {check} from 'express-validator';
+import {check, param} from 'express-validator';
 
 export const createValidator = [
   check('title').exists().withMessage('Title is required').escape().trim().notEmpty().withMessage('Title cannot be empty'),
@@ -9,8 +9,9 @@ export const createValidator = [
 ];
 
 export const updateValidator = [
+  param('id').isInt().withMessage('Id must be an integer'),
   check('title').optional().escape().trim().notEmpty().withMessage('Title cannot be empty'),
   check('description').optional().escape().trim().notEmpty().withMessage('Description cannot be empty'),
   check('eventDateTime').optional().isISO8601().toDate().withMessage("Event Date Time must be a valid date time"),
-  check('locationId').exists().withMessage('Location is required').isInt().withMessage('Location Id must be an integer'),
+  check('locationId').optional().isInt().withMessage('Location Id must be an integer'),
 ];
