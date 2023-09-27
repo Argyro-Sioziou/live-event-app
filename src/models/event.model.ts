@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from "typeorm"
+import LocationModel from "@models/location.model"
 
 @Entity()
 export default class EventModel {
@@ -14,19 +15,21 @@ export default class EventModel {
     @Column({ type: 'datetime' })
     eventDateTime: Date
 
-    @Column({ nullable: true })
-    location: string
-
     @CreateDateColumn()
     createdDate: Date
 
     @UpdateDateColumn()
     updatedDate: Date
 
-    constructor(title: string, description: string, eventDateTime: Date, location: string) {
+    @ManyToOne(type => LocationModel, location => location.events) location: LocationModel;
+
+    @Column()
+    locationId: number
+
+    constructor(title: string, description: string, eventDateTime: Date, locationId: number) {
         this.title = title;
         this.description = description;
         this.eventDateTime = eventDateTime;
-        this.location = location;
+        this.locationId = locationId;
       }
 }
