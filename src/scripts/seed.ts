@@ -15,28 +15,45 @@ const locations = [
     city: 'Athens',
     address: 'Pireos 100',
     postalCode: '11854',
+  },
+  {
+    name: 'Thuishaven',
+    country: 'Netherlands',
+    city: 'Amsterdam',
+    address: 'Contactweg 68',
+    postalCode: '1014 BW',
   }
 ];
 
 // Dummy events
 const events = [
   {
-    title: 'Athens Tech Meetup',
-    description: 'A meetup for all tech enthusiasts',
-    eventDateTime: new Date('2020-04-02T18:00:00.000Z'),
+    title: 'Ioulia Karapataki',
+    description: 'Live Concert',
+    eventDateTime: new Date('2023-09-06T21:00:00.000Z'),
+    locationId: 1,
+  },
+  {
+    title: 'Stan Christ / KØZLØV / CARAVEL / ALT8',
+    description: 'Electronic Music',
+    eventDateTime: new Date('2023-09-30T13:00:00.000Z'),
+    locationId: 2,
+  },
+  {
+    title: 'Athens Bar Show 2023',
+    description: 'An annual educational expo for bartenders and bar professionals',
+    eventDateTime: new Date('2023-11-08T13:00:00.000Z'),
     locationId: 1,
   },
 ];
 
 AppDataSource.initialize().then(async () => {
   // Create locations before events to use the generated ids
-  for (const location of locations) {
-    await locationRepository.save(new LocationModel(location.name, location.country, location.city, location.address, location.postalCode));
-  }
+  await Promise.all(locations.map(async (location) => locationRepository.save(new LocationModel(location.name, location.country, location.city, location.address, location.postalCode))));
 
-  for (const event of events) {
-    await eventRepository.save(new EventModel(event.title, event.description, event.eventDateTime, event.locationId));
-  }
+  await Promise.all(events.map(async (event) => eventRepository.save(new EventModel(event.title, event.description, event.eventDateTime, event.locationId))));
+
+  console.log('Dummy data created!');
 
   process.exit(0);
 });
