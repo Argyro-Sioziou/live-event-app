@@ -13,7 +13,7 @@ const event = new Event(
   'Test Event',
   'Test Event Description',
   new Date(),
-  'Test Event Location',
+  1,
 );
 
 /* Event Controller Tests */

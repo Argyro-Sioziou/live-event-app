@@ -10,9 +10,9 @@ import EventController from '../../../src/controllers/event.controller';
 chai.use(chaiHttp);
 const expect = chai.expect;
 
-const event = { title: 'Test Event', description: 'Test Event Description', eventDateTime: new Date()};
+const event = { title: 'Test Event', description: 'Test Event Description', eventDateTime: new Date(), locationId: 1};
 
-const invalidEvent = { title: '', description: '', eventDateTime: ''};
+const invalidEvent = { title: '', description: '', eventDateTime: '', locationId: 'some text'};
 
 describe('Events API', () => {
   const sandbox = sinon.createSandbox();
@@ -75,11 +75,12 @@ describe('Events API', () => {
 
     const validationErrors = validationResult(validatorSpy.lastCall.args[0]).array();
 
-    // Title, description and event date are invalid, therefore 3 errors should be returned
-    expect(validationErrors.length).to.equal(3);
+    // Title, description,event date nad location id are invalid, therefore 4 errors should be returned
+    expect(validationErrors.length).to.equal(4);
     expect(validationErrors[0].msg).to.equal('Title cannot be empty');
     expect(validationErrors[1].msg).to.equal('Description cannot be empty');
     expect(validationErrors[2].msg).to.equal('Event Date Time must be a valid date time');
+    expect(validationErrors[3].msg).to.equal('Location Id must be an integer');
 
     // Validator should have thrown error and controller should not have been called
     expect(createEventStub.callCount).to.equal(0);
@@ -103,11 +104,12 @@ describe('Events API', () => {
 
     const validationErrors = validationResult(validatorSpy.lastCall.args[0]).array();
 
-    // Title, description and event date are invalid, therefore 3 errors should be returned
-    expect(validationErrors.length).to.equal(3);
+    // Title, description,event date nad location id are invalid, therefore 4 errors should be returned
+    expect(validationErrors.length).to.equal(4);
     expect(validationErrors[0].msg).to.equal('Title cannot be empty');
     expect(validationErrors[1].msg).to.equal('Description cannot be empty');
     expect(validationErrors[2].msg).to.equal('Event Date Time must be a valid date time');
+    expect(validationErrors[3].msg).to.equal('Location Id must be an integer');
 
     // Validator should have thrown error and controller should not have been called
     expect(updateEventStub.callCount).to.equal(0);
