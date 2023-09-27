@@ -71,7 +71,7 @@ export default class EventService {
    */
   public async updateEvent(
     id: number,
-    { title, description, eventDateTime } : { title?: string, description?: string, eventDateTime?: Date }
+    { title, description, eventDateTime, locationId } : { title?: string, description?: string, eventDateTime?: Date, locationId?: number }
   ): Promise<void> {
     // Update event by specific id
     const event = await eventRepository.findOneBy({ id });
@@ -86,6 +86,7 @@ export default class EventService {
       title,
       description,
       eventDateTime,
+      locationId
     });
   }
 }
